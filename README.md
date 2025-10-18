@@ -5,8 +5,7 @@ A modern Kanban-style task management application built with React, TypeScript, 
 ## 📸 Live Demo
 https://react-kanban-dnd.vercel.app/
 
-![Kanban Board Screenshot](<img width="1612" height="895" alt="image" src="https://github.com/user-attachments/assets/1903fc71-9966-4d9f-b8a5-b26a8b0e8abb" />
-)
+![Kanban Board Screenshot](screenshot.png)
 
 *Live screenshot of the Kanban board showing task management interface with drag-and-drop functionality*
 
