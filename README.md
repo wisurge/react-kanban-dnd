@@ -1,46 +1,153 @@
-# Getting Started with Create React App
+# Kanban Clone - Personal Task Management Board
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern Kanban-style task management application built with React, TypeScript, and TailwindCSS. Features drag-and-drop functionality, persistent state management, and mobile-responsive design.
 
-## Available Scripts
+## 📸 Live Demo
 
-In the project directory, you can run:
+![Kanban Board Screenshot](./screenshot.png)
 
-### `npm start`
+*Live screenshot of the Kanban board showing task management interface with drag-and-drop functionality*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Setup Instructions
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
 
-### `npm test`
+### Installation & Running
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone and install dependencies**
+   ```bash
+   git clone <repository-url>
+   cd kanban-clone
+   npm install
+   ```
 
-### `npm run build`
+2. **Start development server**
+   ```bash
+   npm start
+   ```
+   Navigate to `http://localhost:3000`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Run tests**
+   ```bash
+   npm test
+   npm test -- --coverage
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🏗️ Architecture
 
-### `npm run eject`
+### Component Structure (Atomic Design)
+```
+src/
+├── components/
+│   ├── atoms/              # Button, Input, Card
+│   ├── molecules/          # Task, TaskModal, HistoryLog
+│   └── organisms/          # Board, Column
+├── store/
+│   └── boardStore.ts       # Zustand state management
+├── utils/
+│   ├── dateUtils.ts        # Date formatting utilities
+│   └── dndBackend.ts       # Custom drag & drop backend
+└── types/
+    └── index.ts           # TypeScript definitions
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Key Technical Decisions
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**State Management**: Went with Zustand over Redux for this project
+- Much simpler setup and less boilerplate
+- Built-in TypeScript support worked great
+- The persistence middleware made localStorage integration seamless
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Drag & Drop**: Used react-dnd with a custom backend approach
+- HTML5Backend handles desktop interactions perfectly
+- Added mobile-drag-drop polyfill for touch devices since react-dnd-touch-backend was causing Jest issues
+- This hybrid solution works well across all devices
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Styling**: TailwindCSS was the right choice here
+- Rapid development without getting bogged down in custom CSS
+- The responsive utilities made mobile layout straightforward
+- Added some custom scrollbar styles for a nicer look
 
-## Learn More
+**Testing**: Jest + React Testing Library
+- Mocked react-dnd to avoid the ES module issues in tests
+- Focused on testing user interactions and store actions
+- Ended up with solid coverage without over-engineering
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## ⏱️ Development Time
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Total time**: Around 6-8 hours spread across a day
+*(including setup, testing, and writing this README)*
+
+| Phase | Time | What I worked on |
+|--------|------|------------------|
+| **Project Setup & Architecture** | ~45 min | Getting everything configured - TypeScript, Tailwind, and setting up the Zustand store structure |
+| **Core Components Development** | ~1.5 hr | Building the main Board, Column, and Task components following atomic design principles |
+| **Drag & Drop Implementation** | ~1.25 hr | Integrating react-dnd with a custom backend that works on both desktop and mobile |
+| **State Persistence & Testing** | ~1.5 hr | Adding Zustand's persistence middleware and writing comprehensive unit/integration tests |
+| **UI/UX Polish & Documentation** | ~45 min | Making it responsive, adding proper modals for CRUD actions, and final documentation |
+
+The main focus was delivering a complete, stable MVP with good test coverage and solid mobile experience.
+
+---
+
+## ⚡ What I'd Do Differently Next Time
+
+This project hits all the assignment requirements, but there are definitely some areas I'd enhance if I had more time or this was going to production:
+
+### 🧱 Data Persistence
+- Currently using localStorage which is perfect for an MVP
+- In a real app, I'd probably add server sync or at least IndexedDB for better performance with larger datasets
+
+### 🧩 Error Handling
+- Right now it's pretty basic - just some try/catch blocks
+- Would love to add proper error boundaries, toast notifications, and better retry logic
+
+### ♿ Accessibility
+- Got the basics covered with keyboard navigation
+- Could definitely improve ARIA labels and screen reader support
+
+### 📱 Mobile Drag & Drop
+- The mobile-drag-drop polyfill works well, but it's not quite as smooth as native touch handling
+- Might explore react-dnd-touch-backend more or look into other touch-optimized solutions
+
+### 🧪 Testing
+- Happy with the 70%+ coverage on critical paths
+- Would add more edge case testing and maybe some E2E tests with Playwright
+
+### 🎨 Design Polish
+- Tailwind utilities got me to a clean, functional design quickly
+- Would love to add dark mode, better animations, and maybe a proper design system
+
+## ✅ Assignment Completion
+
+### Core Requirements ✅
+- ✅ Add new task (title + optional description)
+- ✅ Drag and drop tasks within and across columns
+- ✅ Edit a task's title inline
+- ✅ Delete a task
+- ✅ All changes persist on refresh using localStorage
+
+### Stretch Goals ✅
+- ✅ Filter tasks by keyword
+- ✅ Task history log (last 5 actions)
+- ✅ Auto-focus on new task input
+- ✅ Mobile responsive layout
+
+### Bonus Features I Added
+- ✅ Comprehensive testing suite (131 tests)
+- ✅ Mobile drag & drop support
+- ✅ Custom delete confirmation modal (way better than browser alerts)
+- ✅ Professional UI/UX design
+- ✅ TypeScript throughout
+- ✅ Date utilities and formatting
+
+---
+
+**Built with React, TypeScript, TailwindCSS, and a lot of coffee ☕**
