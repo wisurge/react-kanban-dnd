@@ -3,8 +3,9 @@
 A modern Kanban-style task management application built with React, TypeScript, and TailwindCSS. Features drag-and-drop functionality, persistent state management, and mobile-responsive design.
 
 ## 📸 Live Demo
+https://react-kanban-dnd.vercel.app/
 
-![Kanban Board Screenshot](./screenshot.png)
+![Kanban Board Screenshot](image.png)
 
 *Live screenshot of the Kanban board showing task management interface with drag-and-drop functionality*
 
